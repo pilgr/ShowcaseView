@@ -71,7 +71,7 @@ public class ShowcaseView extends RelativeLayout implements View.OnClickListener
 			backColor = styled.getInt(R.styleable.ShowcaseView_backgroundColor, Color.argb(128, 80, 80, 80));
 			styled.recycle();
 		} else {
-			backColor = Color.parseColor("#3333B5E5");
+			backColor = Color.parseColor("#BB000000");
 		}
 		metricScale = getContext().getResources().getDisplayMetrics().density;
 		mBackupButton = (Button) LayoutInflater.from(context).inflate(R.layout.showcase_button, null);
@@ -357,7 +357,7 @@ public class ShowcaseView extends RelativeLayout implements View.OnClickListener
 		//float spaceRight = canvasW - voidedArea.right;
 
 		//TODO currently only considers above or below showcase, deal with left or right
-		return new float[]{24 * metricScale, spaceTop > spaceBottom ? 128 * metricScale : 24 * metricScale + voidedArea.bottom, canvasW - 48 * metricScale};
+		return new float[]{24 * metricScale, spaceTop > spaceBottom ? 48 * metricScale : voidedArea.bottom - 24 * metricScale, canvasW - 48 * metricScale};
 
 	}
 
@@ -539,6 +539,13 @@ public class ShowcaseView extends RelativeLayout implements View.OnClickListener
 	public ConfigOptions getConfigOptions() {
 		return mOptions;
 	}
+
+    public static ShowcaseView insertShowcaseView(int viewToShowcaseId, Activity activity, int titleId,
+                                                  int detailTextId) {
+        String title = activity.getString(titleId);
+        String detailText = activity.getString(detailTextId);
+        return insertShowcaseView(viewToShowcaseId, activity, title, detailText, null);
+    }
 
 	/**
 	 * Quick method to insert a ShowcaseView into an Activity
