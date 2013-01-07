@@ -341,7 +341,6 @@ public class ShowcaseView extends RelativeLayout implements View.OnClickListener
 			}
 		}
 
-		c.setBitmap(null);
 		b.recycle();
 
 		super.dispatchDraw(canvas);
