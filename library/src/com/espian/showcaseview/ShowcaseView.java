@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
@@ -76,6 +77,17 @@ public class ShowcaseView extends RelativeLayout implements View.OnClickListener
 		metricScale = getContext().getResources().getDisplayMetrics().density;
 		mBackupButton = (Button) LayoutInflater.from(context).inflate(R.layout.showcase_button, null);
 		setConfigOptions(new ConfigOptions());
+
+        Resources resources = context.getResources();
+        int navigationBarHeight = 0;
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            navigationBarHeight = resources.getDimensionPixelSize(resourceId);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
+            setPadding(0, 0, 0, navigationBarHeight);
+        }
 	}
 
 	private void init() {
